@@ -1,0 +1,1 @@
+SELECT T.*, T.ROWID FROM [#] T

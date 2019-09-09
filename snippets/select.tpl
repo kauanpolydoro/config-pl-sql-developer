@@ -1,0 +1,1 @@
+SELECT T.* FROM [#] WHERE 1 = 1

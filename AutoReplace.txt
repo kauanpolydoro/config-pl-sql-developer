@@ -1,3 +1,5 @@
+--Uso geral
+
 EDIT = SELECT ROWID, T.* FROM
 SF = SELECT * FROM
 S* = SELECT * FROM
@@ -12,21 +14,26 @@ KLOCK = ALTER SYSTEM KILL SESSION '000,000' IMMEDIATE;
 LKLOCK = DECLARE COMANDO VARCHAR2(1000); BEGIN FOR I IN (SELECT * FROM V$SESSION WHERE upper(PROGRAM) != UPPER('plsqldev.exe')) LOOP BEGIN COMANDO := 'ALTER SYSTEM KILL SESSION ''' || I.SID || ',' || I.SERIAL# || ''' IMMEDIATE'; EXECUTE IMMEDIATE COMANDO; EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE(COMANDO || ' - ' || SQLERRM); END; END LOOP; END;
 LKLOCKA = BEGIN FOR I IN (SELECT * FROM V$SESSION WHERE PROGRAM != 'plsqldev.exe') LOOP BEGIN RDSADMIN.RDSADMIN_UTIL.KILL(SID => I.SID, SERIAL => I.SERIAL#, METHOD => 'IMMEDIATE'); EXCEPTION WHEN OTHERS THEN NULL; END; END LOOP; END;
 ELOCK = SELECT SID, SERIAL#, SQL_TEXT, USERS_EXECUTING, USER_IO_WAIT_TIME, VS.* FROM V$SQLAREA V, V$SESSION VS WHERE VS.SQL_ID = V.SQL_ID;
-TD_ = Snippets\to_date.tpl
-TOD_ = Snippets\to_date long.tpl
-**_ = Snippets\plsdqldoc comment.tpl
-DPL_ = Snippets\dbms put_line.tpl
-EX_ = Snippets\exception block.tpl
-IF_ = Snippets\if block.tpl
-IFE_ = Snippets\if else block.tpl
-BE_ = Snippets\begin block.tpl
-SF_ = Snippets\select.tpl
-EDIT_ = Snippets\select with rowid.tpl
-SFD = Snippets\select dual.tpl
-XP_ = Snippets\xmltype_pretty_print.tpl
-XS_ = Snippets\xmltype_xmlserialize.tpl
-XR_ = Snippets\xmltype_xmlroot.tpl
-REGEX_ = Snippets\regexp_like.tpl
+
+--Snippets
+
+BE_ = Snippets\BEGIN STATEMENT.tpl
+EDIT_ = Snippets\EDIT TABLE.tpl
+DPL_ = Snippets\DBMS.PUT_LINE.tpl
+EX_ = Snippets\EXCEPTION STATEMENT.tpl
+IF_ = Snippets\IF STATEMENT.tpl
+IFE_ = Snippets\IF_ELSE STATEMENT.tpl
+**_ = Snippets\PLSQLDOC COMMENT.tpl
+REGEX_ = Snippets\REGEXP_LIKE.tpl
+SEARCH_ = Snippets\SEARCH USER_SOURCE.tpl
+SEARCHA_ = Snippets\SEARCH ALL_SOURCE.tpl
+SFD = Snippets\SELECT FROM DUAL.tpl
+SF_ = Snippets\SELECT STATEMENT.tpl
+TD_ = Snippets\TO DATE.tpl
+TOD_ = Snippets\TO_DATE HOUR.tpl
+XP_ = Snippets\XMLTYPE_PRETTY_PRINT.tpl
+XR_ = Snippets\XMLTYPE_XMLROOT.tpl
+XS_ = Snippets\XMLTYPE_XMLSERIALIZE.tpl
 
 --Utilizado apenas na i9 Supply
 
@@ -43,3 +50,7 @@ SLOGAF = SELECT * FROM LOG_ACTION WHERE UPPER(LOGACT_MORE_INFO) LIKE UPPER('%000
 SEARCHM = SELECT * FROM I9_UIW.MESSAGE WHERE UPPER(MS_DESC) LIKE UPPER('%000%');
 SEARCHT = SELECT * FROM I9_UIW.TITLE WHERE UPPER(TT_DESC) LIKE UPPER('%000%');
 
+--Snippets i9 Supply
+
+SEARCHT_ = Snippets\i9 SEARCH TITLE.tpl
+SEARCHM_ = Snippets\i9 SEARCH MESSAGE.tpl

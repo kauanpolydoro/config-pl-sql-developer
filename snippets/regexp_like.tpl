@@ -1,1 +1,1 @@
-regexp_like([#]&field, '&text', 'i') 
+REGEXP_LIKE([#]&field,'&text', 'i')

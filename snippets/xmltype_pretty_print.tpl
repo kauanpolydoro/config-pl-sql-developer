@@ -1,1 +1,0 @@
-XMLTYPE([#]).EXTRACT('*').GETCLOBVAL()

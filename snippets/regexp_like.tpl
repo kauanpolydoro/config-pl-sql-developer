@@ -1,1 +1,1 @@
-REGEXP_LIKE([#]&field,'&text', 'i')
+REGEXP_LIKE([#]&campo,'&regex','i')
